@@ -1,29 +1,32 @@
 /* ===== CSS Variables & Reset ===== */
 :root {
-    --primary: #667eea;
-    --primary-dark: #5a67d8;
-    --secondary: #764ba2;
-    --accent: #f093fb;
-    --bg-dark: #0f0f23;
-    --bg-card: #1a1a2e;
-    --bg-card-hover: #252542;
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0c0;
-    --text-muted: #6b6b8a;
-    --border: rgba(255, 255, 255, 0.1);
-    --border-hover: rgba(255, 255, 255, 0.2);
-    --success: #10b981;
-    --warning: #f59e0b;
-    --error: #ef4444;
-    --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.4);
-    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    --gradient-text: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Neon BVB Theme */
+    --primary: #FFE600;
+    /* Neon Yellow */
+    --primary-dark: #ccb800;
+    --secondary: #111111;
+    --accent: #FFFF00;
+    --bg-dark: #000000;
+    --bg-card: #0A0A0A;
+    --bg-card-hover: #141414;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CCCCCC;
+    --text-muted: #666666;
+    --border: #333333;
+    --border-hover: #FFE600;
+    --success: #FFE600;
+    --warning: #FF9900;
+    --error: #FF4444;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.9);
+    --shadow-glow: 0 0 20px rgba(255, 230, 0, 0.4);
+    --gradient: linear-gradient(135deg, #FFE600 0%, #FFCC00 100%);
+    --gradient-text: linear-gradient(135deg, #FFE600 20%, #FFFFFF 80%);
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *,
@@ -45,6 +48,12 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
+    /* Industrial diagonal stripe pattern */
+    background-image: repeating-linear-gradient(45deg,
+            #050505 0px,
+            #050505 2px,
+            #000000 2px,
+            #000000 20px);
 }
 
 /* ===== Background Animation ===== */
@@ -252,14 +261,18 @@ body {
 }
 
 .btn-primary {
-    background: var(--gradient);
-    color: white;
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    background: var(--primary);
+    color: #000000;
+    box-shadow: var(--shadow-glow);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+    background: var(--primary-hover);
+    box-shadow: 0 0 30px rgba(255, 230, 0, 0.6);
 }
 
 /* ===== Generator Section ===== */
@@ -327,7 +340,8 @@ body {
 .input-field:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.2);
+    background: rgba(255, 230, 0, 0.05);
 }
 
 .input-field::placeholder {
@@ -363,6 +377,56 @@ body {
     background: rgba(102, 126, 234, 0.1);
 }
 
+/* Type Selector */
+.type-selector {
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+}
+
+.type-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.type-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.type-btn.active {
+    background: var(--bg-card);
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.type-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.form-grid {
+    display: grid;
+    gap: 16px;
+}
+
 .shape-preview {
     width: 24px;
     height: 24px;
@@ -385,6 +449,14 @@ body {
     transform: rotate(45deg);
     width: 18px;
     height: 18px;
+}
+
+.shape-leaf {
+    border-radius: 12px 0 12px 0;
+}
+
+.shape-fluid {
+    border-radius: 40%;
 }
 
 /* Color Controls */
@@ -953,6 +1025,8 @@ body {
 .history-actions {
     display: flex;
     justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .btn-secondary {
