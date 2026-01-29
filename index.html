@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="QRgo - Create stunning, customizable QR codes with custom shapes, colors, logos, and transparent backgrounds.">
+    <title>QRgo - Custom QR Code Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="floating-qr" style="--delay: 0s; --x: 10%; --y: 20%;"></div>
+        <div class="floating-qr" style="--delay: 2s; --x: 80%; --y: 10%;"></div>
+        <div class="floating-qr" style="--delay: 4s; --x: 20%; --y: 70%;"></div>
+        <div class="floating-qr" style="--delay: 6s; --x: 70%; --y: 80%;"></div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="currentColor" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="currentColor" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="currentColor" />
+                        <rect x="14" y="14" width="3" height="3" fill="currentColor" />
+                        <rect x="18" y="18" width="3" height="3" fill="currentColor" />
+                    </svg>
+                </div>
+                <span class="logo-text">QRgo</span>
+            </div>
+            <nav class="nav">
+                <a href="#generator" class="nav-link active" data-tab="generator">Generator</a>
+                <a href="#history" class="nav-link" data-tab="history">History</a>
+                <a href="#features" class="nav-link">Features</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge"><span class="badge-dot"></span>Free & Unlimited</div>
+                <h1 class="hero-title">Create <span class="gradient-text">Stunning</span> QR Codes</h1>
+                <p class="hero-subtitle">Generate beautiful, customizable QR codes with custom shapes, colors, logos,
+                    and transparent backgrounds.</p>
+                <a href="#generator" class="btn btn-primary">Start Creating</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="generator" class="generator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">QR Code Generator</h2>
+                <p class="section-subtitle">Customize every aspect of your QR code</p>
+            </div>
+
+            <div class="generator-wrapper">
+                <div class="controls-panel">
+                    <div class="control-group">
+                        <label class="control-label">Content</label>
+                        <input type="text" id="qr-content" class="input-field" placeholder="Enter URL or text..."
+                            value="https://example.com">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Module Shape</label>
+                        <div class="shape-options">
+                            <button class="shape-btn active" data-shape="square">
+                                <div class="shape-preview shape-square"></div>
+                            </button>
+                            <button class="shape-btn" data-shape="rounded">
+                                <div class="shape-preview shape-rounded"></div>
+                            </button>
+                            <button class="shape-btn" data-shape="dots">
+                                <div class="shape-preview shape-dots"></div>
+                            </button>
+                            <button class="shape-btn" data-shape="diamond">
+                                <div class="shape-preview shape-diamond"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Colors</label>
+                        <div class="color-controls">
+                            <div class="color-picker-group">
+                                <label class="color-label">Foreground</label>
+                                <input type="color" id="fg-color" class="color-input" value="#1a1a2e">
+                            </div>
+                            <div class="color-picker-group">
+                                <label class="color-label">Background</label>
+                                <input type="color" id="bg-color" class="color-input" value="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Gradient</label>
+                        <div class="toggle-wrapper">
+                            <label class="toggle"><input type="checkbox" id="gradient-toggle"><span
+                                    class="toggle-slider"></span></label>
+                            <span class="toggle-label">Enable gradient</span>
+                        </div>
+                        <div class="gradient-colors hidden" id="gradient-colors">
+                            <input type="color" id="gradient-start" class="color-input" value="#667eea">
+                            <input type="color" id="gradient-end" class="color-input" value="#764ba2">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Transparency</label>
+                        <div class="toggle-wrapper">
+                            <label class="toggle"><input type="checkbox" id="transparent-toggle"><span
+                                    class="toggle-slider"></span></label>
+                            <span class="toggle-label">Transparent background</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Center Logo</label>
+                        <div class="logo-upload-wrapper">
+                            <input type="file" id="logo-upload" accept="image/*" class="file-input">
+                            <label for="logo-upload" class="file-label">Upload Logo</label>
+                            <button class="remove-logo hidden" id="remove-logo">✕</button>
+                        </div>
+                        <div class="logo-size-control hidden" id="logo-size-control">
+                            <input type="range" id="logo-size" min="10" max="40" value="25" class="range-input">
+                            <span id="logo-size-value">25%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">QR Size</label>
+                        <input type="range" id="qr-size" min="200" max="600" value="300" step="50" class="range-input">
+                        <span id="qr-size-value">300px</span>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Error Correction</label>
+                        <select id="error-correction" class="select-field">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">Quartile (25%)</option>
+                            <option value="H">High (30%) - Best for logos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="preview-panel">
+                    <div class="preview-card">
+                        <div class="preview-header">
+                            <h3>Preview</h3>
+                        </div>
+                        <div class="preview-container" id="preview-container">
+                            <div class="checkered-bg"></div>
+                        </div>
+                        <div class="scan-status" id="scan-status">
+                            <span class="status-dot success"></span>
+                            <span class="status-text">Ready to scan</span>
+                        </div>
+                    </div>
+
+                    <div class="download-section">
+                        <h3>Download</h3>
+                        <div class="download-buttons">
+                            <button class="download-btn" id="download-png">PNG</button>
+                            <button class="download-btn" id="download-svg">SVG</button>
+                            <button class="download-btn" id="download-pdf">PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="history-section hidden">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Your History</h2>
+                <p class="section-subtitle">Track and manage your generated QR codes</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="total-codes">0</span>
+                        <span class="stat-label">Total Created</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="latest-time">-</span>
+                        <span class="stat-label">Last Created</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-list" id="history-list">
+                <!-- History items will be populated here -->
+                <div class="empty-history">
+                    <p>No history yet. Create your first QR code!</p>
+                </div>
+            </div>
+
+            <div class="history-actions">
+                <button class="btn btn-secondary" id="clear-history">Clear All History</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Custom Shapes</h3>
+                    <p>Square, rounded, dots, or diamond module shapes.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Beautiful Colors</h3>
+                    <p>Custom colors and stunning gradients.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Logo Embedding</h3>
+                    <p>Add your brand logo to the center.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Transparent BG</h3>
+                    <p>Create QR codes with transparent backgrounds.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multiple Formats</h3>
+                    <p>Download in PNG, SVG, or PDF.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Scan Guaranteed</h3>
+                    <p>Error correction ensures reliability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 QRgo. A TRAIN 303 PROJECT . HGP</p>
+        </div>
+    </footer>
+
+    <div class="toast hidden" id="toast"><span id="toast-message"></span></div>
+
+    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
