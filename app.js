@@ -1,3 +1,62 @@
+class ThemeManager {
+    constructor() {
+        this.STORAGE_KEY = 'qrgo-theme';
+        this.btn = document.getElementById('theme-toggle');
+        this.metaThemeColor = document.getElementById('theme-color-meta');
+        this.COLORS = { dark: '#1a1a2e', light: '#F5F5F0' };
+
+        // Derive initial theme (inline script already set the attribute;
+        // read it back so we stay in sync rather than recalculating).
+        this.current = document.documentElement.getAttribute('data-theme') === 'light'
+            ? 'light'
+            : 'dark';
+
+        this._updateButton();
+
+        if (this.btn) {
+            this.btn.addEventListener('click', () => this.toggle());
+            // Keyboard: Space/Enter are handled natively for <button>
+        }
+
+        // Keep in sync if the user changes their OS preference during a session
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+            // Only follow system if the user hasn't made an explicit choice
+            if (!localStorage.getItem(this.STORAGE_KEY)) {
+                this._apply(e.matches ? 'light' : 'dark', false);
+            }
+        });
+    }
+
+    toggle() {
+        this._apply(this.current === 'dark' ? 'light' : 'dark', true);
+    }
+
+    _apply(theme, persist) {
+        this.current = theme;
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+        if (this.metaThemeColor) {
+            this.metaThemeColor.setAttribute('content', this.COLORS[theme]);
+        }
+        if (persist) {
+            localStorage.setItem(this.STORAGE_KEY, theme);
+        }
+        this._updateButton();
+    }
+
+    _updateButton() {
+        if (!this.btn) return;
+        const isLight = this.current === 'light';
+        this.btn.setAttribute(
+            'aria-label',
+            isLight ? 'Switch to dark theme' : 'Switch to light theme'
+        );
+    }
+}
+
 class QRGenerator {
     constructor() {
         this.settings = {
@@ -698,5 +757,6 @@ class QRGenerator {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.themeManager = new ThemeManager();
     window.app = new QRGenerator();
 });
